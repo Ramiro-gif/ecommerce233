@@ -48,8 +48,10 @@ const Navbar = () => {
                 size={40}/>
                 <p className="text-3xl font-pacifico text-[#FFCC00]" style={{
                 textShadow: `
-                    -1px -2px 0 #283593,   
+                    
+                    2px -2px 0 #283593,   
                     -2px 2px 0 #283593,   
+                    2px 4px 0 #283593
                 `,
                 letterSpacing: '3px'
                 }} >La Calesita</p>
