@@ -44,9 +44,23 @@ const Navbar = () => {
                 <>
                 <AiOutlineShoppingCart 
                 cursor={"pointer"}
-                size={30}/>
-                <p></p>
-                <AiOutlineMenu cursor={"pointer"} onClick={()=> setIsMenuOpen(true)} size={30}/>
+                className="pl-2"
+                size={40}/>
+                <p className="text-3xl font-pacifico text-[#FFCC00]" style={{
+                textShadow: `
+                    -1px -2px 0 #283593,   
+                    -2px 2px 0 #283593,   
+                `,
+                letterSpacing: '3px'
+                }} >La Calesita</p>
+                <AiOutlineMenu 
+                cursor={"pointer"}
+                onClick={()=> setIsMenuOpen(true)} 
+                size={40}
+                color="#f1f1f1" className="p-2"
+
+                />
+            
                     </>
             }
 
@@ -54,7 +68,7 @@ const Navbar = () => {
             <>
             {links.map((l) =>(
                 <Link 
-                    className="flex pl-10 pr-10 text-2x1 font-semibold w-15 text-[#f1eeee]"
+                    className="flex pl-10 pr-10 text-2x1 font-Pacifico text-[#f1eeee]"
                     to={`${l.link}`}
                         onClick={()=> setIsMenuOpen(false)}>
                     {l.name}
