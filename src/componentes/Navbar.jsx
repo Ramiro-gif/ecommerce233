@@ -9,7 +9,7 @@ const links = [
   },
   {
     name: 'Productos',
-    link: '/',
+    link: '/catalogop',
   },
   {
     name: 'Servicios',
