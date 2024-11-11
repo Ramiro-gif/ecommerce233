@@ -7,7 +7,8 @@ const AddProduct = () => {
     id: '', // Agregamos el campo id
     name: '',
     description: '',
-    category: '',
+    category: 'Dulce', // Default a 'Dulce'
+    units: '', // Cambiado a string
     image: ''
   });
 
@@ -56,7 +57,8 @@ const AddProduct = () => {
             id: '',
             name: '',
             description: '',
-            category: '',
+            category: 'Dulce',
+            units: '',
             image: ''
           });
           axios.get('/api/products').then(response => setProducts(response.data));
@@ -72,7 +74,8 @@ const AddProduct = () => {
             id: '',
             name: '',
             description: '',
-            category: '',
+            category: 'Dulce',
+            units: '',
             image: ''
           });
           axios.get('/api/products').then(response => setProducts(response.data));
@@ -90,6 +93,7 @@ const AddProduct = () => {
       name: product.name,
       description: product.description,
       category: product.category,
+      units: product.units || '',
       image: product.image
     });
   };
@@ -108,18 +112,19 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Agregar/Modificar Producto</h2>
+    <div className="container mx-auto p-10">
+      
 
       {/* Tabla de productos existentes */}
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Productos Existentes</h3>
+        <h2 className="text-xl font-semibold mb-4">Productos Existentes</h2>
         <table className="min-w-full bg-white border-collapse border">
           <thead>
             <tr>
               <th className="border p-2">Nombre</th>
               <th className="border p-2">Descripción</th>
               <th className="border p-2">Categoría</th>
+              <th className="border p-2">Unidades</th>
               <th className="border p-2">Acciones</th>
             </tr>
           </thead>
@@ -129,6 +134,7 @@ const AddProduct = () => {
                 <td className="border p-2">{product.name}</td>
                 <td className="border p-2">{product.description}</td>
                 <td className="border p-2">{product.category}</td>
+                <td className="border p-2">{product.units}</td>
                 <td className="border p-2">
                   <button
                     className="bg-yellow-500 text-white p-1 mr-2"
@@ -177,11 +183,25 @@ const AddProduct = () => {
 
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2" htmlFor="category">Categoría</label>
-          <input
-            type="text"
+          <select
             id="category"
             name="category"
             value={productData.category}
+            onChange={handleInputChange}
+            className="border p-2 w-full"
+          >
+            <option value="Dulce">Dulce</option>
+            <option value="Salado">Salado</option>
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2" htmlFor="units">Unidades</label>
+          <input
+            type="text"
+            id="units"
+            name="units"
+            value={productData.units}
             onChange={handleInputChange}
             className="border p-2 w-full"
           />

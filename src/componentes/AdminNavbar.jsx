@@ -10,7 +10,7 @@ const AdminNavbar = ({ onLogout }) => { // Recibe la función onLogout como prop
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-yellow-200 p-4">
+    <div className="flex flex-col min-h-screen bg-yellow-200 p-20">
       <nav className=" p-4 flex justify-between items-center">
         <button onClick={handleLogout} className="text-black font-semibold bg-blue-500 border border-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap">
           Cerrar Sesión

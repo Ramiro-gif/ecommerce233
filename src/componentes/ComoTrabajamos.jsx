@@ -1,5 +1,10 @@
 import React from 'react';
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import rapi from '../Images/rapi.png';
+import pago from '../Images/pago.png';
+import mastercard from '../Images/mastercard.png';
+import visa from '../Images/visa.png';
+import whatsap from '../Images/whatsap.png';
 
 const ComoTrabajamos = () => {
   return (
@@ -22,10 +27,10 @@ const ComoTrabajamos = () => {
       <div className="text-center py-8 px-4 lg:px-20">
         <h2 className="text-2xl font-bold mb-4">La Calesita</h2>
         <p className="text-lg">
-          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </p>
         <p className="text-lg mt-4">
-          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </p>
       </div>
 
@@ -47,61 +52,67 @@ const ComoTrabajamos = () => {
           className="w-full h-48 object-cover"
         />
       </div>
-      <footer className="bg-[#a48b96] text-white py-10 px-6 ">
-        <div className="flex text-3x1 flex-col md:flex-row justify-around items-start">
-          {/* Apartado Bigu */}
-          <div className="mb-6 md:mb-0">
-            <img src="/logolimp2.png" alt="Bigu" className="mb-4 w-32"/>
-          </div>
-
-          {/* Apartado de enlaces */}
-          <div>
-            <h4 className="font-bold mb-4 font-pacifico"
-            style={{
-              textShadow: `1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593`,
-              letterSpacing: "3px",
-              margin: "0 5px",
-            }}>La Calesita</h4>
-            <br/>
-            <ul>
-              <li>Venta Mayorista</li> 
-              <li>Puntos de Venta</li>
-            </ul>
-          </div>
-
-          {/* Apartado de contacto */}
-          <div>
-            <h4 className="font-bold mb-4 font-pacifico"
-            style={{
-              textShadow: `1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593`,
-              letterSpacing: "3px",
-              margin: "0 5px",
-            }}>Contáctanos</h4> <br/>
-            <p>Dirección: Av. Apoquindo 6410, of. 605, Las Condes.</p>
-            <p>Teléfono: (+56) 9 3460 8298</p>
-            <p>Email: info@bigu.cl</p>
-            <p>Horario: Lun-Sáb, 9AM-6PM</p>
+      <footer className="bg-[#603319] text-white py-10 px-6"> {/* Color de fondo marrón oscuro */}
+      <div className="flex flex-col md:flex-row justify-around items-start">
+        
+        {/* Sección de redes sociales */}
+        <div>
+          <h4 className="font-bold mb-4">Seguinos</h4>
+          <div className="flex space-x-4">
+            <FaInstagram className="text-white animate-bounce" size={30} />
+            <FaFacebookF className="text-white animate-bounce" size={30} />
           </div>
         </div>
 
-        {/* Separador */}
-        <hr className="my-8 border-gray-400"/>
-        <p className='text-center justify-between font-pacifico'>Nuestras redes sociales</p>
-
-        {/* Créditos y redes sociales */}
-        <div className="flex flex-col md:flex-row justify-around items-center">
+        {/* Sección de contacto */}
+        <div>
+          <h4 className="font-bold mb-4">Contáctanos</h4>
           
-          <div className="flex items-center space-x-4 mt-8">
-            <FaFacebookF className="text-white" size={25} />
-            <FaTwitter className="text-white" size={25} />
-            <FaYoutube className="text-white" size={25} />
-            <FaInstagram className="text-white" size={25} />
-           
-          </div>
-          
-          
+          <p> +54 9 387-5952017</p>
+          <p>calesita@gmail.com</p>
+          <p>La Calesita Golosinas, Pellegrini 903, A4400 Salta</p>
         </div>
-      </footer>
+
+        {/* Métodos de pago */}
+        <div className="mt-8 md:mt-0">
+          <div className="flex space-x-4">
+            <img 
+              src={mastercard} 
+              alt="Mastercard" 
+              className="w-12 h-7 rounded-lg" // Tamaño más pequeño y esquinas redondeadas
+            />
+            <img 
+              src={visa} 
+              alt="Visa" 
+              className="w-12 h-7 rounded-lg" // Tamaño más pequeño y esquinas redondeadas
+            />
+            <img 
+              src={pago} 
+              alt="Pago Fácil" 
+              className="w-12 h-7 rounded-lg" // Tamaño más pequeño y esquinas redondeadas
+            />
+            <img 
+              src={rapi} 
+              alt="RapiPago" 
+              className="w-12 h-7 rounded-lg" // Tamaño más pequeño y esquinas redondeadas
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Sección inferior: Derechos y WhatsApp */}
+      <div className="fixed bottom-10 right-10 animate-bounce-custom">
+  {/* Icono de WhatsApp */}
+  <a href="https://wa.me/5493875952017" target="_blank" rel="noopener noreferrer">
+    <img 
+      src={whatsap} 
+      alt="WhatsApp" 
+      className="w-12 transition-transform duration-300 ease-in-out hover:scale-125 animate-bounce" 
+    />
+  </a>
+</div>
+
+    </footer>
     </div>
   );
 };

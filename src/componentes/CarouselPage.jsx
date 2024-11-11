@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import img1 from "../Images/img1.png";
-import img2 from "../Images/img2.png";
-import img3 from "../Images/img3.png";
+import carousel2 from "../Images/carousel2.png";
+import carousel from "../Images/carousel.png";
 
-const images = [img1, img2,];
+const images = [ carousel, carousel2];
 
 const CustomCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,12 +11,12 @@ const CustomCarousel = () => {
 
   // Función para avanzar al siguiente slide
   const goToNext = () => {
-    if (isAnimating) return; // Evita la transición si ya está ocurriendo una animación
+    if (isAnimating) return;
     setIsAnimating(true);
     setTimeout(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       setIsAnimating(false);
-    }, 100); // Coincide con la duración de la transición en Tailwind
+    }, 100);
   };
 
   // Función para retroceder al slide anterior
@@ -30,16 +30,16 @@ const CustomCarousel = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(goToNext, 6000); // Cambia automáticamente cada 3 segundos
+    const interval = setInterval(goToNext, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div id="carouselExampleControls" className="relative w-full h-auto overflow-hidden"> {/* Limita la altura máxima */}
+    <div id="carouselExampleControls" className="relative w-full h-auto overflow-hidden max-w-[90%] mx-auto border-4 border-transparent shadow-lg hover:shadow-xl mt-20"> {/* Limita el ancho máximo y centra */}
       <div className="relative flex transition-transform duration-[600ms] ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {images.map((image, index) => (
           <div key={index} className="w-full flex-shrink-0">
-            <img src={image} className="block w-full h-full max-h-[500px] object-cover" alt={`Slide ${index + 1}`} /> {/* Ajusta la altura automáticamente */}
+            <img src={image} className="block w-full h-full max-h-[900px] object-contain" alt={`Slide ${index + 1}`} /> {/* Ajuste de imagen */}
           </div>
         ))}
       </div>
