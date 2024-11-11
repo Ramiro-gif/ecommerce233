@@ -42,16 +42,16 @@ const Productos = () => {
 
         {/* Fragancias Section */}
         <section className="grid grid-cols-2 gap-6 pt-6">
-          <div className="flex flex-col justify-around items-end pt-5">
+          <div className="flex flex-col justify-around items-end pt-5 ">
             <span className="h-2 w-24 bg-[#ff2e63] flex-end rounded-md"></span>
             <span className="h-2 w-20 bg-[#2d42b8] flex-end rounded-md"></span>
             <span className="h-2 w-16 bg-[#7d32f0] flex-end rounded-md"></span>
           </div>
 
-          <div>
+          <div className='border-4 border-transparent shadow-lg hover:shadow-xl'>
             <img
               ref={(el) => (imgRefs.current[0] = el)}
-              className=" opacity-0"
+              className=" opacity-0  w-56 h-50 border-4 border-transparent shadow-lg hover:shadow-xl"
               src="/assets/destacado.png"
               alt="Perfume"
             />
@@ -59,33 +59,33 @@ const Productos = () => {
         </section>
 
         {/* Zapatillas Section */}
-        <section className="grid pt-6 grid-cols-2 gap-4">
-          <div className="bg-gradient-to-t to-[#fce38a] from-[#f38181] flex justify-center items-center p-4 ">
+        <section className="grid pt-6 grid-cols-2 gap-4 border-4 border-transparent shadow-lg hover:shadow-xl">
+          <div className="bg-gradient-to-t to-[#fce38a] from-[#f38181] flex justify-center items-center p-4 border-4 border-transparent shadow-lg hover:shadow-xl ">
             <img
               ref={(el) => (imgRefs.current[1] = el)}
               src="/assets/destaca2.png"
               alt="Zapatillas"
-              className="object-contain hover:cursor-pointer opacity-0"
+              className="object-contain hover:cursor-pointer opacity-0 w-56 h-50"
             />
           </div>
-          <div className="bg-gradient-to-t to-[#42e695] from-[#3bb2b8] flex justify-center items-center p-4">
+          <div className="bg-gradient-to-t to-[#42e695] from-[#3bb2b8] flex justify-center items-center p-4 border-4 border-transparent shadow-lg hover:shadow-xl">
             <img
               ref={(el) => (imgRefs.current[2] = el)}
               src="/assets/destaca3.png"
               alt="Zapatillas"
-              className="object-contain hover:cursor-pointer opacity-0"
+              className="object-contain hover:cursor-pointer opacity-0 w-56 h-50 border-4 border-transparent shadow-lg hover:shadow-xl"
             />
           </div>
         </section>
 
         {/* Cocina Section */}
         <section className="grid pt-6 grid-cols-1 gap-4">
-          <div className="bg-gradient-to-t to-[#5b247a] from-[#1bcedf] flex justify-center items-center p-4">
+          <div className="bg-gradient-to-t to-[#5b247a] from-[#1bcedf] flex justify-center items-center p-4 border-4 border-transparent shadow-lg hover:shadow-xl">
             <img
               ref={(el) => (imgRefs.current[3] = el)}
               src="/assets/destaca4.png"
               alt="Cocina"
-              className="object-contain hover:cursor-pointer opacity-0"
+              className="object-contain hover:cursor-pointer opacity-0 w-56 h-50 border-4 border-transparent shadow-lg hover:shadow-xl"
             />
           </div>
         </section>

@@ -1,42 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineFilter, AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { BsCartPlus, BsChevronLeft } from "react-icons/bs";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+
 import { Link, useLocation } from 'react-router-dom';
 import axios from "axios";
-
-const prices = [
-  {
-    name: "$10 to $25",
-    value: "10-25",
-  },
-  {
-    name: "$25 to $50",
-    value: "25-50",
-  },
-  {
-    name: "$50 to $200",
-    value: "50-200",
-  },
-];
-
-const ratings = [
-  {
-    name: "4 stars & up",
-    rating: 4,
-  },
-  {
-    name: "3 stars & up",
-    rating: 3,
-  },
-  {
-    name: "2 stars & up",
-    rating: 2,
-  },
-  {
-    name: "1 star & up",
-    rating: 1,
-  },
-];
 
 const ShopCatalogo = () => {
   const [products, setProducts] = useState(false);
@@ -48,8 +15,6 @@ const ShopCatalogo = () => {
 
   const category = sp.get("category") || "all";
   const query = sp.get("query") || "all";
-  const price = sp.get("price") || "all";
-  const rating = sp.get("rating") || "all";
 
   // Obtener categorías desde la API
   const getCategories = async () => {
@@ -66,12 +31,10 @@ const ShopCatalogo = () => {
   const getFilterUrl = (filter) => {
     const filterCategory = filter.category || category;
     const filterQuery = filter.query || query;
-    const filterPrice = filter.price || price;  // Añadido manejo de price
-    const filterRating = filter.rating || rating;  // Añadido manejo de rating
 
     return {
       pathname: "/search",
-      search: `?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}`,  // Incluyendo todos los filtros
+      search: `?category=${filterCategory}&query=${filterQuery}`,  // Incluyendo solo los filtros necesarios
     };
   };
 
@@ -82,25 +45,25 @@ const ShopCatalogo = () => {
           params: {
             category: category,
             query: query,
-            price: price,
-            rating: rating,
           },
         });
+        console.log("Products data:", data); // Agrega este log para ver los datos
         setProducts(data);
       } catch (e) {
-        console.log(e);
+        console.log("Error fetching products:", e); // Log del error si hay uno
       }
     };
+    
     getProducts();
     getCategories();
-  }, [category, rating, price]);
+  }, [category, query]);
 
   const closeMenu = () => {
     setShowFilterMenu(false);
   };
 
   return (
-    <div className='bg-green-600'>
+    <div className='bg-yellow-500'>
       <div className='flex'>
         <AiOutlineFilter
           size={30}
@@ -110,7 +73,7 @@ const ShopCatalogo = () => {
         />
         {showFilterMenu && (
           <div className="flex pl-6 animate-[opening_is_ease-in-out] flex-col w-[70%] h-screen p-4 absolute bg-[#D9D9D9] rounded-sm">
-            <BsChevronLeft onClick={closeMenu} cursor="pointer" />
+            
             <div className='flex flex-col p-2'>
               <h3 className='text-lg font-medium'>Categorías</h3>
               <Link
@@ -140,67 +103,82 @@ const ShopCatalogo = () => {
                 />
               )}
             </div>
-            <p className='mt-8 pb-2 font-medium'>Price</p>
-            <Link
-              onClick={closeMenu}
-              to={getFilterUrl({ price: "all" })}
-              className="pt-1"
-            >
-              All
-            </Link>
-
-            {prices.map((p) => (
-              <Link
-                key={p.value}
-                to={getFilterUrl({ price: p.value })}
-                onClick={closeMenu}
-                className="pt-1"
-              >
-                {p.name}
-              </Link>
-            ))}
-            <p className="mt-8 pb-2 font-medium">Rating</p>
-            <Link
-              onClick={closeMenu}
-              to={getFilterUrl({ rating: "all" })}
-              className="pt-1"
-            >
-              All
-            </Link>
-            {ratings.map((r) => (
-              <Link
-                key={r.rating}
-                to={getFilterUrl({ rating: r.rating })}
-                onClick={closeMenu}
-                className="pt-1"
-              >
-                {r.name}
-              </Link>
-            ))}
           </div>
         )}
       </div>
-      <section className='grid grid-cols-2 h-[80%] gap-3 p-2 pt-10'>
-        {products[0] !== undefined &&
-          products.map(p => (
-            <div
-              key={p.image}
-              className='flex h-min bg-[#D9D9D9] flex-col items-center justify-items-center p-8 rounded-md'>
-              <Link to={`/product/${p.slug}`}>
-                <img className='object-contain' src={p.image} alt="product" />
-              </Link>
-              <div className='flex flex-col items-center justify-center'>
-                <p className='text-[#7a7a7a] pr-3'>{p.description}</p>
-                <BsCartPlus
-                  key={p.id}
-                  size={25}
-                  cursor="pointer"
-                  color="#646464"
-                />
-              </div>
-            </div>
-          ))}
-      </section>
+      <section className='grid md:grid-cols-3 grid-cols-2 h-[80%] gap-3 p-2 pt-10'>
+  {products[0] !== undefined &&
+    products.map(p => (
+      <div
+        key={p.image}
+        className="flex h-min bg-[#ffffff] flex-col items-center justify-items-center p-8 rounded-md shadow-md"
+      >
+        <Link to={`/product/${p.slug}`}>
+          <img className="object-contain w-full h-48" src={p.image} alt="product" />
+        </Link>
+        <div className="flex flex-col items-center justify-center pt-4">
+          <p className="text-lg font-semibold text-center">{p.name}</p> {/* Mostrar el nombre del producto */}
+          <p className="text-[#7a7a7a] text-center">{p.description}</p>
+        </div>
+      </div>
+    ))}
+</section>
+      <footer className="bg-[#a48b96] text-white py-10 px-6 ">
+        <div className="flex text-3x1 flex-col md:flex-row justify-around items-start">
+          {/* Apartado Bigu */}
+          <div className="mb-6 md:mb-0">
+            <img src="/logolimp2.png" alt="Bigu" className="mb-4 w-32"/>
+          </div>
+
+          {/* Apartado de enlaces */}
+          <div>
+            <h4 className="font-bold mb-4 font-pacifico"
+            style={{
+              textShadow: `1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593`,
+              letterSpacing: "3px",
+              margin: "0 5px",
+            }}>La Calesita</h4>
+            <br/>
+            <ul>
+              <li>Venta Mayorista</li> 
+              <li>Puntos de Venta</li>
+            </ul>
+          </div>
+
+          {/* Apartado de contacto */}
+          <div>
+            <h4 className="font-bold mb-4 font-pacifico"
+            style={{
+              textShadow: `1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593`,
+              letterSpacing: "3px",
+              margin: "0 5px",
+            }}>Contáctanos</h4> <br/>
+            <p>Dirección: Av. Apoquindo 6410, of. 605, Las Condes.</p>
+            <p>Teléfono: (+56) 9 3460 8298</p>
+            <p>Email: info@bigu.cl</p>
+            <p>Horario: Lun-Sáb, 9AM-6PM</p>
+          </div>
+        </div>
+
+        {/* Separador */}
+        <hr className="my-8 border-gray-400"/>
+        <p className='text-center justify-between font-pacifico'>Nuestras redes sociales</p>
+
+        {/* Créditos y redes sociales */}
+        <div className="flex flex-col md:flex-row justify-around items-center">
+          
+          <div className="flex items-center space-x-4 mt-8">
+            <FaFacebookF className="text-white" size={25} />
+            <FaTwitter className="text-white" size={25} />
+            <FaYoutube className="text-white" size={25} />
+            <FaInstagram className="text-white" size={25} />
+           
+          </div>
+          
+          
+        </div>
+      </footer>
+
     </div>
   );
 };
