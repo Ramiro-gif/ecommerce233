@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AiOutlineFilter } from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
 import axios from "axios";
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaShoppingCart } from 'react-icons/fa';
+import { StoreContext } from '../store'; // Importar el contexto del StoreProvider
 import rapi from '../Images/rapi.png';
 import pago from '../Images/pago.png';
 import mastercard from '../Images/mastercard.png';
 import visa from '../Images/visa.png';
 import whatsap from '../Images/whatsap.png';
-import fondo from '../Images/fondo.png'; // Ruta de la imagen de fondo
+import fondo from '../Images/fondo.png';
 
 const ShopCatalogo = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+
+  const { state, dispatch } = useContext(StoreContext); // Usar el contexto para manejar el estado global del carrito
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
@@ -57,8 +60,13 @@ const ShopCatalogo = () => {
 
   const closeMenu = () => setShowFilterMenu(false);
 
+  const addToCart = (product) => {
+    dispatch({ type: 'ADD_TO_CART', payload: product }); // Agregar producto al carrito
+    
+  };
+
   return (
-    <div className="min-h-screen flex flex-col" // Contenedor principal con `flex flex-col`
+    <div className="min-h-screen flex flex-col" 
       style={{
         backgroundImage: `url(${fondo})`,
         backgroundSize: 'cover',
@@ -67,7 +75,7 @@ const ShopCatalogo = () => {
     >
       {/* Contenido principal */}
       <div className="flex-grow p-20">
-        <div className='flex'>
+        {/*filto de productos <div className='flex'>
           <AiOutlineFilter
             size={30}
             color='#f2f2f2'
@@ -97,17 +105,17 @@ const ShopCatalogo = () => {
               </div>
             </div>
           )}
-        </div>
+        </div>*/}
 
         <h2 className='text-3xl font-pacifico text-center mt-2 mb-2'>Productos disponibles</h2>
 
         <section className='grid grid-cols-1 md:grid-cols-2 gap-6 p-6'>
           {products.map((p) => (
             <div
-              key={p.image}
+              key={p._id} // Usamos el _id como clave única
               className="flex items-center p-4 rounded-md shadow-md"
             >
-              <Link to={`/product/${p.slug}`}>
+              <Link> {/*to={`/product/${p.slug}`} crea un slug para cada producto*/}
                 <img className="object-contain w-32 h-32" src={p.image} alt={p.name} />
               </Link>
               <div className="border-l border-gray-300 mx-4 h-full"></div>
@@ -115,6 +123,12 @@ const ShopCatalogo = () => {
                 <p className="text-lg font-semibold">{p.name}</p>
                 <p className="text-sm text-gray-600 mt-1">{p.description}</p>
                 <p className="text-sm text-gray-600 mt-1">Unidades: {p.units}</p>
+                <button 
+                  className="mt-2"
+                  onClick={() => addToCart(p)} // Función para agregar al carrito
+                >
+                  <FaShoppingCart />
+                </button>
               </div>
             </div>
           ))}
@@ -122,7 +136,7 @@ const ShopCatalogo = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#603319] text-white py-10 px-6 w-full mt-auto"> {/* Color de fondo marrón oscuro */}
+      <footer className="bg-[#603319] text-white py-10 px-6 w-full mt-auto">
         <div className="flex flex-col md:flex-row justify-around items-start">
           <div>
             <h4 className="font-bold mb-4">Seguinos</h4>

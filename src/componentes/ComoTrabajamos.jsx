@@ -5,26 +5,25 @@ import pago from '../Images/pago.png';
 import mastercard from '../Images/mastercard.png';
 import visa from '../Images/visa.png';
 import whatsap from '../Images/whatsap.png';
+import fondo from '../Images/fondo.png';
 
 const ComoTrabajamos = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white"
+    style={{
+      backgroundImage: `url(${fondo})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
+    >
       {/* Sección de encabezado con fondo rosa */}
-      <div className="bg-pink-500 text-white text-center py-8">
+      <div className=" text-white text-center p-20">
         <h1 className="text-4xl font-bold">QUIENES SOMOS</h1>
       </div>
 
-      {/* Imagen principal grande */}
-      <div className="w-full">
-        <video
-          src="/assets/calesita.mp4"
-          controls
-          className="w-full object-cover h-96"
-        />
-      </div>
-
+     
       {/* Presentación de la empresa */}
-      <div className="text-center py-8 px-4 lg:px-20">
+      <div className="text-center  px-4 lg:px-20">
         <h2 className="text-2xl font-bold mb-4">La Calesita</h2>
         <p className="text-lg">
           xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

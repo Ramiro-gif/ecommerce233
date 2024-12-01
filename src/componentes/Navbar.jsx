@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineUser } from "react-icons/ai";
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import fondo from '../Images/fondo.png'; // Ruta de la imagen de fondo
+import { AiOutlineMenu, AiOutlineClose, AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
+
+import { StoreContext } from "../store";
 
 const links = [
-  { name: "Inicio", link: '/' },
-  { name: 'Productos', link: '/catalogop' },
-  { name: 'Servicios', link: '/servicios' },
-  { name: 'Como trabajamos', link: '/comotrabajamos' }
+  { name: "Inicio", link: "/" },
+  { name: "Productos", link: "/catalogop" },
+  { name: "Servicios", link: "/servicios" },
+  { name: "Como trabajamos", link: "/comotrabajamos" },
 ];
 
 const Navbar = () => {
+  const { state } = useContext(StoreContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -20,34 +21,47 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <div
       className={`fixed top-0 w-full z-10 transition-all duration-300 ease-in-out ${
-        isScrolled ? 'h-16' : 'h-24'
+        isScrolled ? "h-16" : "h-24"
       }`}
-      
     >
-      <div className="flex items-center justify-between bg-gradient-to-r from-red-800 to-yellow-500 rounded-full px-4 py-2 mx-auto max-w-6xl shadow-lg"
-      
-      >
-        {/* Contenedor del logo */}
-        <div className="flex items-center">
-          <p
-            className={`${isScrolled ? 'text-3xl' : 'text-4xl'} font-pacifico text-[#FFCC00]`}
-            style={{
-              textShadow: "1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593"
-            }}
+      <div className="flex items-center justify-between bg-gradient-to-r from-red-800 to-yellow-500 rounded-full px-4 py-2 mx-auto max-w-6xl shadow-lg">
+        {/* Carrito y Logo */}
+        <div className="flex items-center space-x-4">
+          {/* Ícono del carrito */}
+          <div
+            className="relative cursor-pointer"
+            onClick={() => navigate("/cart")}
           >
-            La Calesita
-          </p>
-          <img alt="logo" className="max-w-[60px] max-h-[60px] mb-0 ml-2" src={"/logolimp2.png"} />
+            <AiOutlineShoppingCart size={30} color="white" />
+            {/* Cantidad de productos en el carrito */}
+            {state.cart.cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-yellow-500 text-white text-sm rounded-full w-5 h-5 flex items-center justify-center">
+                {state.cart.cartItems.length}
+              </span>
+            )}
+          </div>
+
+          {/* Logo */}
+          <div className="flex items-center">
+            <p
+              className={`${isScrolled ? "text-3xl" : "text-4xl"} font-pacifico text-[#FFCC00]`}
+              style={{
+                textShadow: "1px -2px 0 #283593, -2px 2px 0 #283593, 1px 2px 0 #283593",
+              }}
+            >
+              La Calesita
+            </p>
+            <img alt="logo" className="max-w-[60px] max-h-[60px] mb-0 ml-2" src={"/logolimp2.png"} />
+          </div>
         </div>
 
         {/* Links para pantallas grandes */}
@@ -69,7 +83,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Ícono del menú para pantallas pequeñas */}
+        {/* Menú hamburguesa */}
         {!isMenuOpen && (
           <div className="md:hidden flex items-center">
             <AiOutlineMenu
@@ -81,7 +95,6 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Menú desplegable para pantallas pequeñas */}
         {isMenuOpen && (
           <div className="fixed top-0 right-0 z-50 bg-gradient-to-t from-purple-600 to-blue-600 p-4 w-64 h-screen">
             <div className="flex justify-end">
@@ -102,20 +115,6 @@ const Navbar = () => {
                 {l.name}
               </Link>
             ))}
-            <Link
-              to="/Login"
-              className="flex items-center text-xl font-pacifico text-white my-4"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Usuario
-              <AiOutlineUser className="ml-2" size={25} />
-            </Link>
-            <div className="flex space-x-4 mt-8">
-              <FaFacebookF className="text-white" size={25} />
-              <FaTwitter className="text-white" size={25} />
-              <FaYoutube className="text-white" size={25} />
-              <FaInstagram className="text-white" size={25} />
-            </div>
           </div>
         )}
       </div>
